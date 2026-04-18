@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TSF FMEA Workspace</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>TSF FMEA Workspace</h1>
+      <p>Collaborative failure mode analysis for tailings storage facilities.</p>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Context</h2>
+        <div class="row">
+          <label for="roleSelect">Role</label>
+          <select id="roleSelect">
+            <option value="viewer">viewer</option>
+            <option value="editor" selected>editor</option>
+            <option value="approver">approver</option>
+            <option value="admin">admin</option>
+          </select>
+          <button id="refreshBtn">Refresh Data</button>
+        </div>
+        <div id="contextSummary" class="muted"></div>
+      </section>
+
+      <section class="grid-2">
+        <article class="card">
+          <h2>Facilities & Sessions</h2>
+          <div class="row">
+            <select id="facilitySelect"></select>
+            <button id="newSessionBtn">New Session</button>
+          </div>
+          <div class="row">
+            <select id="sessionSelect"></select>
+            <select id="stateSelect">
+              <option>Draft</option>
+              <option>In Review</option>
+              <option>Approved</option>
+              <option>Superseded</option>
+            </select>
+            <button id="stateBtn">Update State</button>
+          </div>
+          <div id="sessionMeta" class="muted"></div>
+        </article>
+
+        <article class="card">
+          <h2>Scoring Guidance</h2>
+          <ul>
+            <li>Severity (S): 1-10, highest is severe dam safety consequence.</li>
+            <li>Occurrence (O): 1-10, highest is likely/frequent occurrence.</li>
+            <li>Detection (D): 1-10, highest is difficult to detect early.</li>
+          </ul>
+          <p class="muted">RPN = S x O x D. Residual RPN is re-scored after controls/actions.</p>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Add FMEA Item</h2>
+        <form id="itemForm" class="grid-3">
+          <input id="assetHierarchy" placeholder="Asset hierarchy" required />
+          <input id="failureMechanism" placeholder="Failure mechanism" required />
+          <input id="initiatingEvent" placeholder="Initiating event" />
+          <input id="loadingConditions" placeholder="Loading conditions" />
+          <input id="functionIntent" placeholder="Function / performance intent" />
+          <input id="consequenceCategory" placeholder="Consequence category" />
+          <input id="currentControls" placeholder="Current controls" />
+          <input id="detectionMethod" placeholder="Detection method" />
+          <input id="instrumentTags" placeholder="Instrument tags (comma separated)" />
+          <input id="severity" type="number" min="1" max="10" value="5" />
+          <input id="occurrence" type="number" min="1" max="10" value="5" />
+          <input id="detection" type="number" min="1" max="10" value="5" />
+          <button type="submit">Create Item</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>FMEA Register</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Asset</th>
+              <th>Failure Mechanism</th>
+              <th>S</th>
+              <th>O</th>
+              <th>D</th>
+              <th>RPN</th>
+              <th>State</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="itemRows"></tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2>Traceability Matrix (Compact)</h2>
+        <div id="traceabilityRows"></div>
+      </section>
+
+      <section class="card">
+        <h2>Audit Trail</h2>
+        <div id="auditRows"></div>
+      </section>
+    </main>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
