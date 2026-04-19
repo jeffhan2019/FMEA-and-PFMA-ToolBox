@@ -1,0 +1,7 @@
+.git
+.github
+**/.DS_Store
+app/data/store.json
+Development Plan.md
+FMEA Prompt.md
+READ ME.md
